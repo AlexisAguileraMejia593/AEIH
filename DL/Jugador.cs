@@ -23,5 +23,10 @@ namespace DL
         public virtual Pai NacionalidadNavigation { get; set; } = null!;
 
         public virtual ICollection<Equipo> IdEquipos { get; set; }
+
+        //Propiedades para consulta de GetAll// NO BORRAR
+        public int IdPais { get; set; }
+        public string NombrePais { get; set; }
+        public string NombrePosicion { get; set; }
     }
 }

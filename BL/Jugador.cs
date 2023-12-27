@@ -42,5 +42,96 @@ namespace BL
             }
             return jugadores;
         }
+        public static ML.Jugador GetById(int idJugador)
+        {
+            ML.Jugador jugador = new ML.Jugador();
+            try
+            {
+                using(DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
+                {
+                    var query = context.Jugadors.FromSqlRaw($"JugadorGetById {idJugador}").AsEnumerable().FirstOrDefault();
+                    if(query != null)
+                    {
+                        jugador.Nacionalidad = new ML.Pais();
+                        jugador.Posicion = new ML.Posicion();
+
+                        jugador.Nombre = query.Nombre;
+                        jugador.ApellidoPaterno = query.ApellidoPaterno;
+                        jugador.ApellidoMaterno = query.ApellidoMaterno;
+                        jugador.Foto = query.Foto;
+                        jugador.FechaNacimiento = query.FechaNacimiento;
+                        jugador.Nacionalidad.IdPais = query.IdPais;
+                        jugador.Nacionalidad.Nombre = query.NombrePais;
+                        jugador.Posicion.IdPosicion = query.IdPosicion;
+                        jugador.Posicion.Nombre = query.NombrePosicion;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return jugador;
+        }
+        public static bool Add(ML.JugadorEquipo jugador)
+        {
+            bool correct = false;
+            try
+            {
+                using(DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
+                {
+                    int rowsAffected = context.Database.ExecuteSqlRaw($"JugadorAdd '{jugador.Jugador.Nombre}','{jugador.Jugador.ApellidoPaterno}','{jugador.Jugador.ApellidoMaterno}','{jugador.Jugador.Foto}',{jugador.Jugador.Nacionalidad.IdPais},'{jugador.Jugador.FechaNacimiento.ToShortDateString()}',{jugador.Jugador.Posicion.IdPosicion},{jugador.Equipo.IdEquipo}");
+                    if(rowsAffected > 0)
+                    {
+                        correct = true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return correct;
+        }
+        public static bool Update(ML.JugadorEquipo jugador)
+        {
+            bool correct = false;
+            try
+            {
+                using(DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
+                {
+                    int rowsAffected = context.Database.ExecuteSqlRaw($"JugadorUpdate {jugador.Jugador.IdJugador},'{jugador.Jugador.Nombre}','{jugador.Jugador.ApellidoPaterno}','{jugador.Jugador.ApellidoMaterno}','{jugador.Jugador.Foto}',{jugador.Jugador.Nacionalidad.IdPais},'{jugador.Jugador.FechaNacimiento.ToShortDateString()}',{jugador.Jugador.Posicion.IdPosicion},{jugador.Equipo.IdEquipo}");
+                    if(rowsAffected > 0)
+                    {
+                        correct = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return correct;
+        }
+        public static bool Delete(int idJugador)
+        {
+            bool correct = false;
+            try
+            {
+                using(DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
+                {
+                    int rowsAffected = context.Database.ExecuteSqlRaw($"JugadorDelete {idJugador}");
+                    if (rowsAffected > 0)
+                    {
+                        correct = true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return correct;
+        }
     }
 }

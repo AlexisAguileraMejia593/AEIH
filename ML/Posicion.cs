@@ -9,6 +9,6 @@ namespace ML
     public class Posicion
     {
         public int IdPosicion { get; set; }
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
     }
 }

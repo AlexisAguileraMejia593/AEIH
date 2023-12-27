@@ -9,9 +9,9 @@ namespace ML
     public class Equipo
     {
         public int IdEquipo { get; set; }
-        public string Nombre { get; set; }
-        public ML.Pais Pais { get; set; }
-        public string Logo { get; set; }
-        public ML.Estadio Estadio { get; set; }
+        public string? Nombre { get; set; }
+        public ML.Pais? Pais { get; set; }
+        public string? Logo { get; set; }
+        public ML.Estadio? Estadio { get; set; }
     }
 }

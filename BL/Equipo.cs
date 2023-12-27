@@ -4,7 +4,7 @@ namespace BL
 {
     public class Equipo
     {
-        public static void Add(string Nombre, ML.Pais pais, string Logo, ML.Estadio estadio)
+        public static bool Add(string Nombre, ML.Pais pais, string Logo, ML.Estadio estadio)
         {
             using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
             {
@@ -12,10 +12,12 @@ namespace BL
                 if (rowAffected > 0)
                 {
                     Console.WriteLine("Insertado");
+                    return true;
                 }
                 else
                 {
                     Console.WriteLine("Error");
+                    return false;
                 }
             }
         }
@@ -84,7 +86,7 @@ namespace BL
             // Return the list of objects
             return list;
         }
-        public static void Update(int IdEquipo, string Nombre, ML.Pais pais, string Logo, ML.Estadio estadio)
+        public static bool Update(int IdEquipo, string Nombre, ML.Pais pais, string Logo, ML.Estadio estadio)
         {
             using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
             {
@@ -92,14 +94,16 @@ namespace BL
                 if (rowAffected > 0)
                 {
                     Console.WriteLine("Actualizado");
+                    return true;
                 }
                 else
                 {
                     Console.WriteLine("Error");
+                    return false;
                 }
             }
         }
-        public static void Delete(int IdEquipo)
+        public static bool Delete(int IdEquipo)
         {
             using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
             {
@@ -107,10 +111,12 @@ namespace BL
                 if (rowAffected > 0)
                 {
                     Console.WriteLine("Eliminado");
+                    return true;
                 }
                 else
                 {
                     Console.WriteLine("Error");
+                    return false;
                 }
             }
         }

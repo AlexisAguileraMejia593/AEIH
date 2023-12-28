@@ -4,19 +4,17 @@ namespace BL
 {
     public class Equipo
     {
-        public static bool Add(string Nombre, ML.Pais pais, string Logo, ML.Estadio estadio)
+        public static bool Add(ML.Equipo equipo)
         {
             using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
             {
-                var rowAffected = context.Database.ExecuteSqlRaw($"EquipoAdd '{Nombre}', '{Logo}', '{pais.IdPais}', '{estadio.IdEstadio}'");
+                var rowAffected = context.Database.ExecuteSqlRaw($"EquipoAdd '{equipo.Nombre}', '{equipo.Logo}', '{equipo.Pais.IdPais}', '{equipo.Estadio.IdEstadio}'");
                 if (rowAffected > 0)
                 {
-                    Console.WriteLine("Insertado");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine("Error");
                     return false;
                 }
             }
@@ -128,25 +126,22 @@ namespace BL
             }
             catch (Exception ex)
             {
-                // Aquí puedes manejar la excepción, por ejemplo, imprimir el mensaje de error.
                 Console.WriteLine(ex.Message);
             }
             return equipos;
         }
 
-        public static bool Update(string Nombre, string Logo, ML.Pais pais, ML.Estadio estadio)
+        public static bool Update(ML.Equipo equipo)
         {
             using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
             {
-                var rowAffected = context.Database.ExecuteSqlRaw($"EquipoUpdate '{Nombre}' ,'{Logo}', '{pais.IdPais}', '{estadio.IdEstadio}'");
+                var rowAffected = context.Database.ExecuteSqlRaw($"EquipoUpdate {equipo.IdEquipo},'{equipo.Nombre}' ,'{equipo.Logo}', '{equipo.Pais.IdPais}', '{equipo.Estadio.IdEstadio}'");
                 if (rowAffected > 0)
                 {
-                    Console.WriteLine("Actualizado");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine("Error");
                     return false;
                 }
             }
@@ -158,12 +153,10 @@ namespace BL
                 var rowAffected = context.Database.ExecuteSqlRaw($"EquipoDelete '{IdEquipo}'");
                 if (rowAffected > 0)
                 {
-                    Console.WriteLine("Eliminado");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine("Error");
                     return false;
                 }
             }

@@ -19,11 +19,11 @@ namespace SL_WEB_API.Controllers
             }
             else
             {
-                return NotFound();
+                return BadRequest();
             }
 
         }
-        [Route("GetById/{idEquipo?}")]
+        [Route("GetById/{idEquipo}")]
         [HttpGet]
         public IActionResult GetById(int idEquipo)
         {
@@ -35,51 +35,52 @@ namespace SL_WEB_API.Controllers
             }
             else
             {
-                return NotFound();
+                return BadRequest();
             }
         }
         [Route("Add")]
         [HttpPost]
         public IActionResult Add([FromBody] ML.Equipo equipo)
         {
-            var result = BL.Equipo.Add(equipo.Nombre, equipo.Pais, equipo.Logo, equipo.Estadio);
-            if (result != null)
+            bool result = BL.Equipo.Add(equipo);
+            if (result)
             {
-                return Ok(result);
+                return Ok("Se ha agregado correctamente");
             }
             else
             {
-                return NotFound();
+                return BadRequest();
             }
         }
         [Route("Delete/{idEquipo?}")]
         [HttpDelete]
         public IActionResult Delete(int idEquipo)
         {
-            var result = BL.Equipo.Delete(idEquipo);
+            bool result = BL.Equipo.Delete(idEquipo);
             if (result)
             {
-                return Ok(result);
+                return Ok("Se ha eliminado correctamente");
             }
             else
             {
-                return NotFound();
+                return BadRequest();
             }
         }
 
-        [Route("Update/{idEquipo?}")]
+        [Route("Update/{idEquipo}")]
         [HttpPut]
         public IActionResult Update(int idEquipo, [FromBody] ML.Equipo equipo)
         {
-            idEquipo = equipo.IdEquipo;
-            var result = BL.Equipo.Update(equipo.Nombre, equipo.Logo, equipo.Pais, equipo.Estadio);
-            if (result != null)
+            equipo.IdEquipo = idEquipo;
+            bool result = BL.Equipo.Update(equipo);
+
+            if (result)
             {
-                return Ok(result);
+                return Ok("Se ha actualizado correctamente");
             }
             else
             {
-                return NotFound();
+                return BadRequest();
             }
         }
     }

@@ -81,17 +81,12 @@ namespace BL
                         "Jugador.IdPosicion, JugadorEquipo.IdEquipo, Equipo.Nombre, Equipo.Logo, Equipo.IdPais, Equipo.IdEstadio FROM JugadorEquipo " +
                         "LEFT JOIN Jugador ON JugadorEquipo.IdJugador = Jugador.IdJugador " +
                         "LEFT JOIN Equipo ON JugadorEquipo.IdEquipo = Equipo.IdEquipo " +
-                        "WHERE JugadorEquipo.IdJugador = @IdJugador";
+                        $"WHERE JugadorEquipo.IdJugador = {jugadorEquipo.Jugador.IdJugador}";
 
                     SqlCommand cmd = new SqlCommand(query, context);
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     DataTable tableJugadorEquipo = new DataTable();
 
-                    SqlParameter paramId = new SqlParameter();
-                    paramId = new SqlParameter("@IdJugador", SqlDbType.Int);
-                    paramId.Value = jugadorEquipo.Jugador.IdJugador;
-
-                    cmd.Parameters.Add(paramId);
                     adapter.Fill(tableJugadorEquipo);
 
                     if (tableJugadorEquipo.Rows.Count > 0)

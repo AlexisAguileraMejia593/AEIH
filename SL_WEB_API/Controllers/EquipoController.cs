@@ -71,8 +71,8 @@ namespace SL_WEB_API.Controllers
         [HttpPut]
         public IActionResult Update(int idEquipo, [FromBody] ML.Equipo equipo)
         {
-            equipo.IdEquipo = idEquipo;
-            var result = BL.Equipo.Update(equipo.IdEquipo, equipo.Nombre, equipo.Pais, equipo.Logo, equipo.Estadio);
+            idEquipo = equipo.IdEquipo;
+            var result = BL.Equipo.Update(equipo.Nombre, equipo.Logo, equipo.Pais, equipo.Estadio);
             if (result != null)
             {
                 return Ok(result);

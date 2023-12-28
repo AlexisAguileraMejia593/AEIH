@@ -18,6 +18,8 @@ namespace DL
         public string Logo { get; set; } = null!;
         public int IdPais { get; set; }
         public int IdEstadio { get; set; }
+        // ALIAS
+        //public string equiponombre { get; set; }
 
         public virtual Estadio IdEstadioNavigation { get; set; } = null!;
         public virtual Pai IdPaisNavigation { get; set; } = null!;

@@ -8,7 +8,7 @@ namespace BL
         {
             using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
             {
-                var rowAffected = context.Database.ExecuteSqlRaw($"EquipoAdd '{Nombre}', '{pais}', '{Logo}', '{estadio}'");
+                var rowAffected = context.Database.ExecuteSqlRaw($"EquipoAdd '{Nombre}', '{Logo}', '{pais.IdPais}', '{estadio.IdEstadio}'");
                 if (rowAffected > 0)
                 {
                     Console.WriteLine("Insertado");
@@ -24,73 +24,121 @@ namespace BL
         public static List<object> GetAll()
         {
             List<object> list = new List<object>();
+            bool result = false;
             try
             {
                 using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
                 {
-                    var query = context.Equipos.FromSqlRaw("EquipoGetAll").ToList();
-                    if (query.Count > 0)
-                    {
+                    var query = (from Equipo in context.Equipos
+                                 join pais in context.Pais on Equipo.IdPais equals pais.IdPais
+                                 join estadio in context.Estadios on Equipo.IdEstadio equals estadio.IdEstadio
 
+                                 select new
+                                 {
+                                     IdEquipo = Equipo.IdEquipo,
+                                     NombreEquipo = Equipo.Nombre,
+                                     Logo = Equipo.Logo,
+                                     IdPais = pais.IdPais,
+                                     NombrePais = pais.Nombre,
+                                     IdEstadio = estadio.IdEstadio,
+                                     NombreEstadio = estadio.Nombre,
+                                     Foto = estadio.Foto,
+                                     IdPais2 = estadio.IdPais,
+                                     NombrePais2 = estadio.IdPaisNavigation.Nombre
+                                 });
+                    if (query != null)
+                    {
                         foreach (var registro in query)
                         {
                             ML.Equipo equipo = new ML.Equipo();
                             equipo.IdEquipo = registro.IdEquipo;
-                            equipo.Nombre = registro.Nombre;
+                            equipo.Nombre = registro.NombreEquipo;
+                            equipo.Logo = registro.Logo;
                             equipo.Pais = new ML.Pais();
                             equipo.Pais.IdPais = registro.IdPais;
-                            equipo.Logo = registro.Logo;
+                            equipo.Pais.Nombre = registro.NombrePais;
                             equipo.Estadio = new ML.Estadio();
                             equipo.Estadio.IdEstadio = registro.IdEstadio;
+                            equipo.Estadio.Nombre = registro.NombreEstadio;
+                            equipo.Estadio.Foto = registro.Foto;
+                            equipo.Estadio.Pais = new ML.Pais();
+                            equipo.Estadio.Pais.IdPais = registro.IdPais2;
+                            equipo.Estadio.Pais.Nombre = registro.NombrePais2;
                             list.Add(equipo);
                         }
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                result = false;
             }
             return list;
         }
-        public static List<object> GetById(int IdEquipo)
+
+        public static object GetById(int IdEquipo)
         {
-            List<object> list = new List<object>();
+            object equipos = null;
             try
             {
                 using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
                 {
-                    var query = context.Equipos.FromSqlRaw($"EquipoGetById '{IdEquipo}'").AsEnumerable().SingleOrDefault();
-
-                    if (query != null)
+                    var registro = (from Equipo in context.Equipos
+                                    join pais in context.Pais on Equipo.IdPais equals pais.IdPais
+                                    join estadio in context.Estadios on Equipo.IdEstadio equals estadio.IdEstadio
+                                    where Equipo.IdEquipo == IdEquipo
+                                    select new
+                                    {
+                                        IdEquipo = Equipo.IdEquipo,
+                                        NombreEquipo = Equipo.Nombre,
+                                        Logo = Equipo.Logo,
+                                        IdPais = pais.IdPais,
+                                        NombrePais = pais.Nombre,
+                                        IdEstadio = estadio.IdEstadio,
+                                        NombreEstadio = estadio.Nombre,
+                                        Foto = estadio.Foto,
+                                        IdPais2 = estadio.IdPais,
+                                        NombrePais2 = estadio.IdPaisNavigation.Nombre
+                                    }).FirstOrDefault();
+                    if (registro != null)
                     {
                         ML.Equipo equipo = new ML.Equipo();
-                        equipo.IdEquipo = query.IdEquipo;
-                        equipo.Nombre = query.Nombre;
+                        equipo.IdEquipo = registro.IdEquipo;
+                        equipo.Nombre = registro.NombreEquipo;
+                        equipo.Logo = registro.Logo;
                         equipo.Pais = new ML.Pais();
-                        equipo.Pais.IdPais = query.IdPais;
-                        equipo.Logo = query.Logo;
+                        equipo.Pais.IdPais = registro.IdPais;
+                        equipo.Pais.Nombre = registro.NombrePais;
                         equipo.Estadio = new ML.Estadio();
-                        equipo.Estadio.IdEstadio = query.IdEstadio;
-                        list.Add(equipo);
-
+                        equipo.Estadio.IdEstadio = registro.IdEstadio;
+                        equipo.Estadio.Nombre = registro.NombreEstadio;
+                        equipo.Estadio.Foto = registro.Foto;
+                        equipo.Estadio.Pais = new ML.Pais();
+                        equipo.Estadio.Pais.IdPais = registro.IdPais2;
+                        equipo.Estadio.Pais.Nombre = registro.NombrePais2;
+                        return equipo;
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Handle the exception and return an empty list
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return new List<object>();
+                // Aquí puedes manejar la excepción, por ejemplo, imprimir el mensaje de error.
+                Console.WriteLine(ex.Message);
             }
-            // Return the list of objects
-            return list;
+            return equipos;
         }
-        public static bool Update(int IdEquipo, string Nombre, ML.Pais pais, string Logo, ML.Estadio estadio)
+
+        public static bool Update(string Nombre, string Logo, ML.Pais pais, ML.Estadio estadio)
         {
             using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
             {
-                var rowAffected = context.Database.ExecuteSqlRaw($"EquipoUpdate '{IdEquipo}', '{Nombre}' ,'{pais}', '{Logo}', '{estadio}'");
+                var rowAffected = context.Database.ExecuteSqlRaw($"EquipoUpdate '{Nombre}' ,'{Logo}', '{pais.IdPais}', '{estadio.IdEstadio}'");
                 if (rowAffected > 0)
                 {
                     Console.WriteLine("Actualizado");

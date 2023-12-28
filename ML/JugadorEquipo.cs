@@ -8,7 +8,7 @@ namespace ML
 {
     public class JugadorEquipo
     {
-        public ML.Jugador Jugador { get; set; }
+        public ML.Jugador? Jugador { get; set; }
         public ML.Equipo Equipo { get; set; }
     }
 }

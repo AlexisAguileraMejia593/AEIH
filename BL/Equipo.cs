@@ -79,7 +79,6 @@ namespace BL
             }
             return list;
         }
-
         public static object GetById(int IdEquipo)
         {
             object equipos = null;
@@ -130,7 +129,6 @@ namespace BL
             }
             return equipos;
         }
-
         public static bool Update(ML.Equipo equipo)
         {
             using (DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())

@@ -7,7 +7,7 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class MarcadorController : ControllerBase
     {
-        [Route("/{IdLiga}")]
+        [Route("Update/{IdLiga}")]
         [HttpPut]
         public IActionResult Update(int IdLiga, [FromBody] ML.Liga liga)
         {

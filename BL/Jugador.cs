@@ -80,7 +80,7 @@ namespace BL
             {
                 using(DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
                 {
-                    int rowsAffected = context.Database.ExecuteSqlRaw($"JugadorAdd '{jugador.Jugador.Nombre}','{jugador.Jugador.ApellidoPaterno}','{jugador.Jugador.ApellidoMaterno}','{jugador.Jugador.Foto}',{jugador.Jugador.Nacionalidad.IdPais},'{jugador.Jugador.FechaNacimiento.ToShortDateString()}',{jugador.Jugador.Posicion.IdPosicion},{jugador.Equipo.IdEquipo}");
+                    int rowsAffected = context.Database.ExecuteSqlRaw($"JugadorAdd '{jugador.Jugador.Nombre}','{jugador.Jugador.ApellidoPaterno}','{jugador.Jugador.ApellidoMaterno}','{jugador.Jugador.Foto}',{jugador.Jugador.Nacionalidad.IdPais},'{jugador.Jugador.FechaNacimiento}',{jugador.Jugador.Posicion.IdPosicion},{jugador.Equipo.IdEquipo}");
                     if(rowsAffected > 0)
                     {
                         correct = true;
@@ -100,7 +100,7 @@ namespace BL
             {
                 using(DL.EstadisticasDeportivasContext context = new DL.EstadisticasDeportivasContext())
                 {
-                    int rowsAffected = context.Database.ExecuteSqlRaw($"JugadorUpdate {jugador.Jugador.IdJugador},'{jugador.Jugador.Nombre}','{jugador.Jugador.ApellidoPaterno}','{jugador.Jugador.ApellidoMaterno}','{jugador.Jugador.Foto}',{jugador.Jugador.Nacionalidad.IdPais},'{jugador.Jugador.FechaNacimiento.ToShortDateString()}',{jugador.Jugador.Posicion.IdPosicion},{jugador.Equipo.IdEquipo}");
+                    int rowsAffected = context.Database.ExecuteSqlRaw($"JugadorUpdate {jugador.Jugador.IdJugador},'{jugador.Jugador.Nombre}','{jugador.Jugador.ApellidoPaterno}','{jugador.Jugador.ApellidoMaterno}','{jugador.Jugador.Foto}',{jugador.Jugador.Nacionalidad.IdPais},'{jugador.Jugador.FechaNacimiento}',{jugador.Jugador.Posicion.IdPosicion},{jugador.Equipo.IdEquipo}");
                     if(rowsAffected > 0)
                     {
                         correct = true;

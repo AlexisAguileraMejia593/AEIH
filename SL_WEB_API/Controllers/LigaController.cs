@@ -44,7 +44,7 @@ namespace SL_WEB_API.Controllers
 
         [EnableCors("API")]
         [Route("Delete/{IdLiga}")]
-        [HttpGet]
+        [HttpDelete]
 
         public IActionResult Delete(int IdLiga)
         {
@@ -79,7 +79,7 @@ namespace SL_WEB_API.Controllers
 
         [EnableCors("API")]
         [Route("")]
-        [HttpPut]
+        [HttpPost]
         public IActionResult Add(ML.Liga liga)
         {
             

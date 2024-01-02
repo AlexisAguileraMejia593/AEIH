@@ -9,7 +9,7 @@ namespace SL_WEB_API.Controllers
     public class ResultadoController : ControllerBase
     {
         [EnableCors("API")]
-        [Route("")]
+        [Route("/{IdPartido}")]
         [HttpGet]
         public IActionResult GetAll(int IdPartido)
         {

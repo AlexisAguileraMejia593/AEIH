@@ -7,20 +7,21 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class MarcadorController : ControllerBase
     {
-        [Route("Update/{IdLiga}")]
-        [HttpPut]
-        public IActionResult Update(int IdLiga, [FromBody] ML.Liga liga)
+        [Route("")]
+        [HttpGet]
+        public IActionResult GetAlll()
         {
-            liga.IdLiga = IdLiga;
-            bool correct = BL.Liga.Update(liga);
-            if (correct)
+            
+            List <object> result = BL.Marcador.GetAll();
+            
+            if (result != null)
             {
-                return Ok(correct);
+                return Ok(result);
             }
             else
             {
-                return StatusCode(400, correct);
-            }
+                return StatusCode(400,result);
+            } 
         }
     }
 }

@@ -7,7 +7,7 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class EstadisticasController : ControllerBase
     {
-        [Route("/{IdEquipo")]
+        [Route("GetById/{IdEquipo}")]
         [HttpGet]
         public IActionResult GetById(int IdEquipo)
         {
@@ -21,7 +21,7 @@ namespace SL_WEB_API.Controllers
                 return StatusCode(400, result);
             }
         }
-        [Route("/{IdEquipo}")]
+        [Route("Update/{IdEquipo}")]
         [HttpPut]
         public IActionResult Update(int IdEquipo, [FromBody] ML.EstadisticaEquipo estadisticaEquipo)
         {

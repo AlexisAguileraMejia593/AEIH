@@ -23,7 +23,7 @@ namespace SL_WEB_API.Controllers
                 return StatusCode(400);
             }
         }
-        [Route("/{IdLiga}")]
+        [Route("GetById/{IdLiga}")]
         [HttpGet]
 
         public IActionResult GetById(int IdLiga)
@@ -39,7 +39,7 @@ namespace SL_WEB_API.Controllers
                 return StatusCode(400);
             }
         }
-        [Route("/{IdLiga}")]
+        [Route("Delete/{IdLiga}")]
         [HttpGet]
 
         public IActionResult Delete(int IdLiga)
@@ -55,7 +55,7 @@ namespace SL_WEB_API.Controllers
                 return StatusCode(400);
             }
         }
-        [Route("/{IdLiga}")]
+        [Route("Update/{IdLiga}")]
         [HttpPut]
         public IActionResult Update(int IdLiga, [FromBody] ML.Liga liga)
         {

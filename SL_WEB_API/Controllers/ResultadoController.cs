@@ -7,7 +7,7 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class ResultadoController : ControllerBase
     {
-        [Route("")]
+        [Route("/{IdPartido}")]
         [HttpGet]
         public IActionResult GetAll(int IdPartido)
         {

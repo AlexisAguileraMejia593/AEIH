@@ -40,7 +40,7 @@ namespace SL_WEB_API.Controllers
             }
         }
         [Route("Delete/{IdLiga}")]
-        [HttpGet]
+        [HttpDelete]
 
         public IActionResult Delete(int IdLiga)
         {
@@ -71,7 +71,7 @@ namespace SL_WEB_API.Controllers
             }
         }
         [Route("")]
-        [HttpPut]
+        [HttpPost]
         public IActionResult Add(ML.Liga liga)
         {
             

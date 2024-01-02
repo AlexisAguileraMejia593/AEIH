@@ -34,6 +34,7 @@ namespace BL
                         foreach ( var item in query )
                         {
                             ML.Estadio estadio = new ML.Estadio();
+                            estadio.Pais = new ML.Pais();
                             estadio.IdEstadio = item.IdEstadio;
                             estadio.Nombre = item.Nombre;
                             estadio.Foto = item.Foto;

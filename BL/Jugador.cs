@@ -55,6 +55,7 @@ namespace BL
                         jugador.Nacionalidad = new ML.Pais();
                         jugador.Posicion = new ML.Posicion();
 
+                        jugador.IdJugador = query.IdJugador;
                         jugador.Nombre = query.Nombre;
                         jugador.ApellidoPaterno = query.ApellidoPaterno;
                         jugador.ApellidoMaterno = query.ApellidoMaterno;

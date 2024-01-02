@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SL_WEB_API.Controllers
@@ -7,7 +8,8 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class ResultadoController : ControllerBase
     {
-        [Route("")]
+        [EnableCors("API")]
+        [Route("/{IdPartido}")]
         [HttpGet]
         public IActionResult GetAll(int IdPartido)
         {
@@ -19,7 +21,7 @@ namespace SL_WEB_API.Controllers
             }
             else
             {
-                return StatusCode(400);
+                return BadRequest();
             }
 
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SL_WEB_API.Controllers
@@ -7,6 +8,7 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class JugadorEquipo : ControllerBase
     {
+        [EnableCors("API")]
         [HttpGet]
         [Route("{idJugador}")]
         public IActionResult GetById(int idJugador)
@@ -26,6 +28,7 @@ namespace SL_WEB_API.Controllers
             }
         }
 
+        [EnableCors("API")]
         [HttpDelete]
         [Route("{idJugador}")]
         public IActionResult Delete(int idJugador)
@@ -42,6 +45,7 @@ namespace SL_WEB_API.Controllers
             }
         }
 
+        [EnableCors("API")]
         [HttpPost]
         [Route("")]
         public IActionResult Add(ML.JugadorEquipo jugadorEquipo)
@@ -58,6 +62,7 @@ namespace SL_WEB_API.Controllers
             }
         }
 
+        [EnableCors("API")]
         [HttpPut]
         [Route("{idJugador}")]
         public IActionResult Update(int idJugador, [FromBody]ML.JugadorEquipo jugadorEquipo)

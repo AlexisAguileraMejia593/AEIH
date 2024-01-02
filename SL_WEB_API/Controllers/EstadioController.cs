@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SL_WEB_API.Controllers
@@ -7,19 +8,20 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class EstadioController : ControllerBase
     {
-        [Route("Update/{IdLiga}")]
-        [HttpPut]
-        public IActionResult Update(int IdLiga, [FromBody] ML.Liga liga)
+        [EnableCors("API")]
+        [Route("")]
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            liga.IdLiga = IdLiga;
-            bool correct = BL.Liga.Update(liga);
-            if (correct)
+            
+            List<object> result = BL.Estadio.GetAll();
+            if (result != null)
             {
-                return Ok(correct);
+                return Ok(result);
             }
             else
             {
-                return StatusCode(400, correct);
+                return BadRequest();
             }
         }
     }

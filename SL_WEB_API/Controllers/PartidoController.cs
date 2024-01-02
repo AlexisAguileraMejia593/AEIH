@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SL_WEB_API.Controllers
@@ -7,6 +8,7 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class PartidoController : ControllerBase
     {
+        [EnableCors("API")]
         [HttpGet]
         [Route("")]
         public IActionResult GetAll()
@@ -23,6 +25,7 @@ namespace SL_WEB_API.Controllers
             }
         }
 
+        [EnableCors("API")]
         [HttpPost]
         [Route("")]
         public IActionResult Add(ML.Partido partido)
@@ -39,6 +42,7 @@ namespace SL_WEB_API.Controllers
             }
         }
 
+        [EnableCors("API")]
         [HttpDelete]
         [Route("{idPartido}")]
         public IActionResult Delete(int idPartido)

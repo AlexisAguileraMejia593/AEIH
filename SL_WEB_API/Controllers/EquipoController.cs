@@ -8,6 +8,7 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class EquipoController : ControllerBase
     {
+        [EnableCors("API")]
         [Route("GetAll")]
         [HttpGet]
         public IActionResult GetAll()
@@ -23,6 +24,8 @@ namespace SL_WEB_API.Controllers
             }
 
         }
+
+        [EnableCors("API")]
         [Route("GetById/{idEquipo}")]
         [HttpGet]
         public IActionResult GetById(int idEquipo)
@@ -38,6 +41,8 @@ namespace SL_WEB_API.Controllers
                 return BadRequest();
             }
         }
+
+        [EnableCors("API")]
         [Route("Add")]
         [HttpPost]
         public IActionResult Add([FromBody] ML.Equipo equipo)
@@ -52,6 +57,8 @@ namespace SL_WEB_API.Controllers
                 return BadRequest();
             }
         }
+
+        [EnableCors("API")]
         [Route("Delete/{idEquipo?}")]
         [HttpDelete]
         public IActionResult Delete(int idEquipo)
@@ -67,6 +74,7 @@ namespace SL_WEB_API.Controllers
             }
         }
 
+        [EnableCors("API")]
         [Route("Update/{idEquipo}")]
         [HttpPut]
         public IActionResult Update(int idEquipo, [FromBody] ML.Equipo equipo)

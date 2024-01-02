@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SL_WEB_API.Controllers
@@ -7,6 +8,7 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class PosicionController : ControllerBase
     {
+        [EnableCors("API")]
         [Route("")]
         [HttpGet]
         public IActionResult GetAll()

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,9 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class LigaController : ControllerBase
     {
+        [EnableCors("API")]
         [Route("")]
         [HttpGet]
-
         public IActionResult GetAll()
         {
             List<object> result = BL.Liga.GetAll();
@@ -20,12 +21,13 @@ namespace SL_WEB_API.Controllers
 
             }else
             {
-                return StatusCode(400);
+                return BadRequest();
             }
         }
+
+        [EnableCors("API")]
         [Route("GetById/{IdLiga}")]
         [HttpGet]
-
         public IActionResult GetById(int IdLiga)
         {
             List<object> result = BL.Liga.GetById(IdLiga);
@@ -36,9 +38,11 @@ namespace SL_WEB_API.Controllers
             }
             else
             {
-                return StatusCode(400);
+                return BadRequest();
             }
         }
+
+        [EnableCors("API")]
         [Route("Delete/{IdLiga}")]
         [HttpGet]
 
@@ -52,9 +56,11 @@ namespace SL_WEB_API.Controllers
             }
             else
             {
-                return StatusCode(400);
+                return BadRequest();
             }
         }
+
+        [EnableCors("API")]
         [Route("Update/{IdLiga}")]
         [HttpPut]
         public IActionResult Update(int IdLiga, [FromBody] ML.Liga liga)
@@ -67,9 +73,11 @@ namespace SL_WEB_API.Controllers
             }
             else
             {
-                return StatusCode(400, correct);
+                return BadRequest();
             }
         }
+
+        [EnableCors("API")]
         [Route("")]
         [HttpPut]
         public IActionResult Add(ML.Liga liga)
@@ -82,7 +90,7 @@ namespace SL_WEB_API.Controllers
             }
             else
             {
-                return StatusCode(400, correct);
+                return BadRequest();
             }
         }
     }

@@ -8,6 +8,7 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class JugadorController : ControllerBase
     {
+        [EnableCors("API")]
         [Route("")]
         [HttpGet]
         public IActionResult GetAll()
@@ -15,6 +16,8 @@ namespace SL_WEB_API.Controllers
             List<object> jugdores = BL.Jugador.GetAll();
             return Ok(jugdores);
         }
+
+        [EnableCors("API")]
         [Route("{idJugador}")]
         [HttpGet]
         public IActionResult GetById(int idJugador)
@@ -29,6 +32,8 @@ namespace SL_WEB_API.Controllers
                 return BadRequest();
             }
         }
+
+        [EnableCors("API")]
         [Route("")]
         [HttpPost]
         public IActionResult Add(ML.JugadorEquipo jugador)
@@ -43,6 +48,8 @@ namespace SL_WEB_API.Controllers
                 return BadRequest(result);
             }
         }
+
+        [EnableCors("API")]
         [Route("{idJugador}")]
         [HttpPut]
         public IActionResult Update(int idJugador, [FromBody]ML.JugadorEquipo jugador)
@@ -58,6 +65,8 @@ namespace SL_WEB_API.Controllers
                 return BadRequest(result);
             }
         }
+
+        [EnableCors("API")]
         [Route("{idJugador}")]
         [HttpDelete]
         public IActionResult Delete(int idJugador)

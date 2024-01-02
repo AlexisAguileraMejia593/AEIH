@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SL_WEB_API.Controllers
@@ -7,6 +8,7 @@ namespace SL_WEB_API.Controllers
     [ApiController]
     public class EstadisticasController : ControllerBase
     {
+        [EnableCors("API")]
         [Route("GetById/{IdEquipo}")]
         [HttpGet]
         public IActionResult GetById(int IdEquipo)
@@ -18,9 +20,11 @@ namespace SL_WEB_API.Controllers
             }
             else
             {
-                return StatusCode(400, result);
+                return BadRequest();
             }
         }
+
+        [EnableCors("API")]
         [Route("Update/{IdEquipo}")]
         [HttpPut]
         public IActionResult Update(int IdEquipo, [FromBody] ML.EstadisticaEquipo estadisticaEquipo)
@@ -32,7 +36,7 @@ namespace SL_WEB_API.Controllers
             }
             else
             {
-                return StatusCode(400, correct);
+                return BadRequest();
             }
         }
     }

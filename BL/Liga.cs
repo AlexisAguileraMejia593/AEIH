@@ -25,6 +25,7 @@ namespace BL
                                      Nombre = liga.Nombre,
                                      Logo = liga.Logo,
                                      IdPais = liga.IdPais,
+                                     NombrePais = pais.Nombre
                                  });
                     if(query != null )
                     {
@@ -36,6 +37,7 @@ namespace BL
                             li.Nombre = item.Nombre;
                             li.Logo = item.Logo;
                             li.Pais.IdPais= item.IdPais;
+                            li.Pais.Nombre = item.NombrePais;
                             ligas.Add( li );
 
                         }
@@ -64,6 +66,7 @@ namespace BL
                                      Nombre = liga.Nombre,
                                      Logo = liga.Logo,
                                      IdPais = liga.IdPais,
+                                     NombrePais = pais.Nombre
                                  });
                     if (query != null)
                     {
@@ -75,6 +78,7 @@ namespace BL
                             li.Nombre = item.Nombre;
                             li.Logo = item.Logo;
                             li.Pais.IdPais = item.IdPais;
+                            li.Pais.Nombre = item.NombrePais;
                             ligas.Add(li);
 
                         }

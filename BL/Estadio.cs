@@ -26,7 +26,8 @@ namespace BL
                                      IdEstadio = estadio.IdEstadio,
                                      Nombre = estadio.Nombre,
                                      Foto = estadio.Foto,
-                                     IdPais = estadio.IdPais
+                                     IdPais = estadio.IdPais,
+                                     NombrePais = pais.Nombre
                                  });
 
                     if(query != null )
@@ -39,6 +40,7 @@ namespace BL
                             estadio.Nombre = item.Nombre;
                             estadio.Foto = item.Foto;
                             estadio.Pais.IdPais = item.IdPais;
+                            estadio.Pais.Nombre = item.NombrePais;
                             estadios.Add( estadio );
                             
                         }

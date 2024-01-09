@@ -31,7 +31,7 @@ namespace DL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=192.168.0.124,1433; Database= EstadisticasDeportivas; TrustServerCertificate=True; User ID=sa; Password=pass@word1;");
+                optionsBuilder.UseSqlServer("Server=192.168.0.122,1433; Database= EstadisticasDeportivas; TrustServerCertificate=True; User ID=sa; Password=pass@word1;");
             }
         }
 

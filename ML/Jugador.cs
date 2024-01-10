@@ -16,5 +16,6 @@ namespace ML
         public ML.Pais? Nacionalidad { get; set; }
         public DateTime? FechaNacimiento { get; set; }
         public ML.Posicion? Posicion { get; set; }
+        public ML.Equipo? Equipo { get; set; }
     }
 }

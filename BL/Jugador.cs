@@ -30,6 +30,10 @@ namespace BL
                             jugador.Nacionalidad.Nombre = item.NombrePais;
                             jugador.Posicion.IdPosicion = item.IdPosicion;
                             jugador.Posicion.Nombre = item.NombrePosicion;
+                            jugador.Equipo = new ML.Equipo();
+                            jugador.Equipo.IdEquipo = (int)item.IdEquipo;
+                            jugador.Equipo.Nombre = item.NombreEquipo;
+                            jugador.Equipo.Logo = item.Logo;
 
                             jugadores.Add(jugador);
                         }
@@ -65,6 +69,10 @@ namespace BL
                         jugador.Nacionalidad.Nombre = query.NombrePais;
                         jugador.Posicion.IdPosicion = query.IdPosicion;
                         jugador.Posicion.Nombre = query.NombrePosicion;
+                        jugador.Equipo = new ML.Equipo();
+                        jugador.Equipo.IdEquipo = (int)query.IdEquipo;
+                        jugador.Equipo.Nombre = query.NombreEquipo;
+                        jugador.Equipo.Logo = query.Logo;
                     }
                 }
             }

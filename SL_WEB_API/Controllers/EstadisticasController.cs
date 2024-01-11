@@ -14,7 +14,7 @@ namespace SL_WEB_API.Controllers
         public IActionResult GetById(int IdEquipo)
         {
             List<object> result = BL.EstadisticaEquipo.GetById(IdEquipo);
-            if (result == null)
+            if (result != null)
             {
                 return Ok(result);
             }
@@ -29,6 +29,8 @@ namespace SL_WEB_API.Controllers
         [HttpPut]
         public IActionResult Update(int IdEquipo, [FromBody] ML.EstadisticaEquipo estadisticaEquipo)
         {
+            estadisticaEquipo.Equipo = new ML.Equipo();
+            estadisticaEquipo.Equipo.IdEquipo = IdEquipo;
             bool correct = BL.EstadisticaEquipo.Update(estadisticaEquipo);
             if (correct)
             {

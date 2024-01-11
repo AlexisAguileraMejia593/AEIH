@@ -8,7 +8,7 @@ namespace ML
 {
     public class EstadisticaEquipo
     {
-        public ML.Equipo Equipo { get; set; }
+        public ML.Equipo? Equipo { get; set; }
         public int PartidosJugados { get; set; }
         public int PartidosGanados { get; set; }
         public int PartidosPerdidos { get; set; }
